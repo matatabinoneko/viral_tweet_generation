@@ -1,4 +1,6 @@
 '''
+extract_viral_tweet.pyで収集したツイッターデータを閲覧するコード
+usage : cat [tweet data path] |python decode.py |less
 '''
 import sys
 import json

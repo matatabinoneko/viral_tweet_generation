@@ -1,8 +1,6 @@
 '''
     extract viral tweet.
-    usage: zcat [tweet path] | python extract_viral_tweet.py > [path you want to save data]
-    dict_keys(['contributors', 'coordinates', 'created_at', 'display_text_range', 'entities', 'favorite_count', 'favorited', 'geo', 'id', 'id_str', 'in_reply_to_screen_name', 'in_reply_to_status_id',
-              'in_reply_to_status_id_str', 'in_reply_to_user_id', 'in_reply_to_user_id_str', 'is_quote_status', 'lang', 'place', 'retweet_count', 'retweeted', 'source', 'text', 'truncated', 'user'])
+    usage: zcat [tweet data path] | python extract_viral_tweet.py > [path you want to save data]
 '''
 import sys
 import json
