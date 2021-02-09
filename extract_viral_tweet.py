@@ -5,23 +5,19 @@
 import sys
 import json
 import argparse
-import logzero
-from logzero import logger
-import logging
 import re
-
-logger.setLevel(logging.DEBUG)
 
 
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--exclude_verified",  default=False,
                         action='store_true', help="")
-    parser.add_argument("--friend_ratio", type=int, help="")
-    parser.add_argument("--favorite_count", type=int, help="")
-    parser.add_argument("--retweet_count", type=int, help="")
+    parser.add_argument("--friend_ratio", type=int, default=1000000, help="")
+    parser.add_argument("--favorite_count", type=int, default=500, help="")
+    parser.add_argument("--retweet_count", type=int, default=1, help="")
     parser.add_argument("--exclude_urls",  default=False,
                         action='store_true', help="")
+    parser.add_argument("--output", help='output file path')
     args = parser.parse_args()
     return args
 
@@ -36,7 +32,6 @@ def is_include_url(text):
 
 def main(fi):
     args = parse_args()
-    logger.info(args)
     for line in fi:
         data = json.loads(line)
         # 公式アカウントを除外
@@ -59,7 +54,8 @@ def main(fi):
         #     if data["entities"]["urls"]["url"]:
         #         continue
 
-        print(json.dumps(data))
+        with open(args.output, 'w') as f:
+            json.dump(data, f, ensure_ascii=False)
     return
 
 

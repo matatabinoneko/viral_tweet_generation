@@ -21,7 +21,7 @@ do
                     --friend_ratio ${f_r} \
                     --favorite_count ${f_c} \
                     --retweet_count ${r_c} \
-                > ${SAVE_DIR}/tweets-${d}-fr_${f_r}-fc_${f_c}-rc_${r_c}.jsonl &
+                    --output ${SAVE_DIR}/tweets-${d}-fr_${f_r}-fc_${f_c}-rc_${r_c}.jsonl &
             done
         done
     done
