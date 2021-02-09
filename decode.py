@@ -9,7 +9,8 @@ import json
 def main(fi):
     for line in fi:
         data = json.loads(line)
-        print(data["text"])
+        print(data["text"], "\nret:", data["retweet_count"],
+              "\nfav:", data["favorite_count"])
         print("-----------")
     return
 

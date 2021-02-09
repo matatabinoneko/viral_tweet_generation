@@ -1,4 +1,6 @@
 #!/bin/bash
+# ツイッターデータを収集するためのスクリプト
+# bash [code name] [save directory] 
 
 SAVE_DIR=${1}
 friend_ratio=( 10000 )
