@@ -1,6 +1,5 @@
 '''
     extract viral tweet.
-    usage: zcat [tweet data path] | python extract_viral_tweet.py > [path you want to save data]
 '''
 import sys
 import json
@@ -12,12 +11,12 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--exclude_verified",  default=False,
                         action='store_true', help="")
-    parser.add_argument("--friend_ratio", type=int, default=1000000, help="")
     parser.add_argument("--favorite_count", type=int, default=500, help="")
     parser.add_argument("--retweet_count", type=int, default=1, help="")
     parser.add_argument("--exclude_urls",  default=False,
                         action='store_true', help="")
     parser.add_argument("--output", help='output file path')
+    # parser.add_argument("--friend_ratio", type=int, default=1000000, help="")
     args = parser.parse_args()
     return args
 
@@ -32,30 +31,29 @@ def is_include_url(text):
 
 def main(fi):
     args = parse_args()
-    for line in fi:
-        data = json.loads(line)
-        # 公式アカウントを除外
-        if args.exclude_verified:
-            if data["user"]["verified"] is True:
-                continue
-        # followerがfolloingのx倍いる人のツイートを除外
-        if args.friend_ratio * data["user"]["friends_count"] < data["user"]["followers_count"]:
-            continue
-        # いいねがx以下のツイートを除外
-        if data["favorite_count"] < args.favorite_count:
-            continue
-        # リツイートがx以下のツイートを除外
-        if data["retweet_count"] < args.retweet_count:
-            continue
-        # urlが貼られているツイートは除外
-        if args.exclude_urls:
-            if is_include_url(data["text"]):
-                continue
-        #     if data["entities"]["urls"]["url"]:
-        #         continue
+    with open(args.output, 'w') as f:
+        for line in fi:
+            data = json.loads(line)
+            # 公式アカウントを除外
+            if args.exclude_verified:
+                if data["user"]["verified"] is True:
+                    continue
 
-        with open(args.output, 'w') as f:
-            json.dump(data, f, ensure_ascii=False)
+            # followerがfolloingのx倍いる人のツイートを除外
+            # if args.friend_ratio * data["user"]["friends_count"] < data["user"]["followers_count"]:
+            #     continue
+
+            # いいねがx以下のツイートを除外
+            if data["favorite_count"] < args.favorite_count:
+                continue
+            # リツイートがx以下のツイートを除外
+            if data["retweet_count"] < args.retweet_count:
+                continue
+            # urlが貼られているツイートは除外
+            if args.exclude_urls:
+                if is_include_url(data["text"]):
+                    continue
+            print(json.dumps(data,  ensure_ascii=False), file=f)
     return
 
 
