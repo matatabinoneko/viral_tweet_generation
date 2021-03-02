@@ -228,6 +228,7 @@ def main(args):
 def cli_main():
     parser = options.get_generation_parser(interactive=True)
     args = options.parse_args_and_arch(parser)
+    args.max_sentences = 1
     main(args)
 
 

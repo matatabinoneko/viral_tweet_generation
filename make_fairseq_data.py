@@ -12,8 +12,6 @@ import json
 
 logger.setLevel(logging.DEBUG)
 
-SEED = 1
-
 SEP = "[SEP]"
 
 
@@ -23,6 +21,8 @@ def parse_args():
         '-i', '--input', type=path.abspath, help='input file path')
     parser.add_argument(
         '-o', '--output', type=path.abspath, help='output file path')
+    parser.add_argument(
+        '--seed',  type=int, default=1, help='seed')
     args = parser.parse_args()
     return args
 
@@ -32,7 +32,7 @@ def main():
     logger.info(args)
 
     # シードを固定
-    random.seed(SEED)
+    random.seed(args.seed)
 
     with open(args.input, 'r') as fin,  open(f"{args.output}", 'w') as fout:
         for line in fin:

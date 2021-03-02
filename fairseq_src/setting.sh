@@ -1,4 +1,4 @@
-export DIR=/work01/tasuku/tmp
+export DIR=/work01/stepqi2020/fairseq_model/improve01
 # preprocess
 export PROCESS_DIR="${DIR}/preprocessed"
 export DECODE_FILE="${DIR}/tokenized"
@@ -8,7 +8,7 @@ export GPU=0
 export MODEL_DIR="${DIR}/models"
 export LOG_DIR="${DIR}/logs"
 export DATA_DIR=${PROCESS_DIR}
-export MAX_UPDATE=10000
+export MAX_UPDATE=100000
 export SEED=1234
 
 # interactive
